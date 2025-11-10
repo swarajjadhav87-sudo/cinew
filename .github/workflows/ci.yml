@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Set up Python environment
+      # Step 2: Set up Python environme
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -28,7 +28,7 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate  # On Windows: venv\Scripts\activate
-          pip install -r requirements.txt  # Install dependencies from requirements.txt
+          pip install python3 # Install dependencies from requirements.txt
 
       # Step 4: Check code formatting using black
       - name: Check code formatting with black
