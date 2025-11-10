@@ -1,0 +1,46 @@
+name: Python CI
+
+on:
+  push:
+    branches:
+      - main   # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - main   # Trigger on PR to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu image
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Use Python 3.8 (you can change this to your preferred version)
+
+      # Step 3: Install dependencies from requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate  # On Windows: venv\Scripts\activate
+          pip install -r requirements.txt  # Install dependencies from requirements.txt
+
+      # Step 4: Check code formatting using black
+      - name: Check code formatting with black
+        run: |
+          source venv/bin/activate
+          black --check .  # --check will only check the formatting, not apply it
+
+      # Step 5: Lint code with flake8
+      - name: Run flake8 linting
+        run: |
+          source venv/bin/activate
+          flake8 .  # Lint all Python files in the repository
+
+      #
+
